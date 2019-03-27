@@ -1,4 +1,4 @@
-namespace Ingredients.Web.Models
+namespace Ingredients.Web.Models.Transport
 {
     public class Ingredient
     {

@@ -1,0 +1,13 @@
+version: '3'
+services:
+  api:
+    build: .
+    ports:
+      - "5001:80"
+  database:
+    image: cassandra
+    restart: always
+    volumes:
+      - /srv/data/cookbook/ingredients/cassandra:/var/lib/cassandra
+    ports:
+      - "7199:7199"

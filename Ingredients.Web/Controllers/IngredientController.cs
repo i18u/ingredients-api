@@ -7,9 +7,15 @@ namespace Ingredients.Web.Controllers
     public class IngredientController : ControllerBase 
     {
         [HttpPost("create")]
-        public void Create(Ingredient ingredient)
+        public void Create(Models.Transport.Ingredient ingredient)
         {
+            
+        }
 
+        [HttpGet]
+        public string Info() 
+        {
+            return "{ \"version\": \"test\" }";
         }
     }
 }
