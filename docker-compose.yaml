@@ -4,10 +4,25 @@ services:
     build: .
     ports:
       - "5001:80"
-  database:
+  cassandra-seed:
+    container_name: cassandra-seed-node
     image: cassandra
     restart: always
     volumes:
       - /srv/data/cookbook/ingredients/cassandra:/var/lib/cassandra
     ports:
-      - "7199:7199"
+      - "9042:9042"
+  cassandra-node-1:
+    image: cassandra
+    command: /bin/bash -c "echo 'Waiting for seed node' && sleep 30 && /docker-entrypoint.sh cassandra -f"
+    environment:
+      - "CASSANDRA_SEEDS=cassandra-seed-node"
+    depends_on:
+      - "cassandra-seed"
+  cassandra-node-2:
+    image: cassandra
+    command: /bin/bash -c "echo 'Waiting for seed node' && sleep 50 && /docker-entrypoint.sh cassandra -f"
+    environment:
+      - "CASSANDRA_SEEDS=cassandra-seed-node"
+    depends_on:
+      - "cassandra-seed"

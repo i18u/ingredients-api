@@ -1,10 +1,49 @@
+using System;
+using Cassandra;
+using Ingredients.Web.Models.Transport;
+
 namespace Ingredients.Web.Models.Database
 {
     public class Ingredient
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string[] Tags { get; set; }
+
+        public static Ingredient FromRow(Row row)
+        {
+            var ingr = new Ingredient();
+
+            ingr.Id = row.GetValue<Guid>("id");
+            ingr.Name = row.GetValue<string>("name");
+            ingr.Description = row.GetValue<string>("description");
+            ingr.Tags = row.GetValue<string[]>("tags");
+
+            return ingr;
+        }
+
+        public static Ingredient FromRow(Guid id, Row row)
+        {
+            var ingr = new Ingredient();
+
+            ingr.Id = id;
+            ingr.Name = row.GetValue<string>("name");
+            ingr.Description = row.GetValue<string>("description");
+            ingr.Tags = row.GetValue<string[]>("tags");
+
+            return ingr;
+        }
+
+        public static Ingredient FromTransport(Models.Transport.Ingredient entity)
+        {
+            return new Ingredient
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Description = entity.Description,
+                Tags = entity.Tags                
+            };
+        }
     }
 }
