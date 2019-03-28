@@ -4,11 +4,29 @@ using Ingredients.Web.Models.Transport;
 
 namespace Ingredients.Web.Models.Database
 {
+    /// <summary>
+    /// Database model for an 'ingredient' object
+    /// </summary>
     public class Ingredient
     {
+        /// <summary>
+        /// Unique ingredient ID
+        /// </summary>
         public Guid Id { get; set; }
+
+        /// <summary>
+        /// Human-readable ingredient name
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Short ingredient description
+        /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Any tags / categorisation for this ingredient
+        /// </summary>
         public string[] Tags { get; set; }
 
         public static Ingredient FromRow(Row row)
@@ -42,7 +60,7 @@ namespace Ingredients.Web.Models.Database
                 Id = entity.Id,
                 Name = entity.Name,
                 Description = entity.Description,
-                Tags = entity.Tags                
+                Tags = entity.Tags
             };
         }
     }

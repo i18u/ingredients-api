@@ -3,21 +3,24 @@ using System.Runtime.Serialization;
 
 namespace Ingredients.Web.Models.Transport
 {
+    /// <summary>
+    /// Transport model for the <see cref="Database.Ingredient"/> model
+    /// </summary>
     [DataContract]
     public class Ingredient
     {
         [DataMember(Name = "id")]
         public Guid Id { get; set; }
 
-        
+
         [DataMember(Name = "name")]
         public string Name { get; set; }
 
-        
+
         [DataMember(Name = "description")]
         public string Description { get; set; }
 
-        
+
         [DataMember(Name = "tags")]
         public string[] Tags { get; set; }
 
