@@ -12,6 +12,7 @@
     <PackageReference Include="CassandraCSharpDriver" Version="3.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="nunit" Version="3.11.0" />
   </ItemGroup>
 
 </Project>
