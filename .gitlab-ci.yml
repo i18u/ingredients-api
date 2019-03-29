@@ -3,9 +3,10 @@ stages:
   - test
   - publish
 
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+
 build:
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   stage: build
   tags:
     - docker
@@ -19,15 +20,15 @@ build:
 
 test:
   stage: test
+  dependencies:
+    - build
   tags:
-    - dotnet
+    - docker
   script:
-    - dotnet build
+    - docker load -i out/cookbook-ingredient-api.tar
     - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=json
 
 publish:
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   stage: publish
   dependencies:
     - build
