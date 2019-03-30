@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ingredients.Cache\Ingredients.Cache.csproj" />
     <ProjectReference Include="..\Ingredients.Web\Ingredients.Web.csproj" />
   </ItemGroup>
 

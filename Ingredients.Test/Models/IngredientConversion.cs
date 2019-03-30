@@ -1,9 +1,9 @@
+using System;
+using NUnit.Framework;
 using DatabaseIngredient = Ingredients.Web.Models.Database.Ingredient;
 using TransportIngredient = Ingredients.Web.Models.Transport.Ingredient;
-using NUnit.Framework;
-using System;
 
-namespace Tests
+namespace Ingredients.Test.Models
 {
     [TestFixture]
     public class IngredientConversion
@@ -17,14 +17,14 @@ namespace Tests
 
             var ingredientId = Guid.NewGuid();
 
-            DatabaseIngredient dbIngredient = new DatabaseIngredient {
+            var dbIngredient = new DatabaseIngredient {
                 Id = ingredientId,
                 Name = TestName,
                 Description = TestDescription,
                 Tags = TestTags
             };
 
-            TransportIngredient tpIngredient = TransportIngredient.FromDatabase(dbIngredient);
+            var tpIngredient = TransportIngredient.FromDatabase(dbIngredient);
 
             Assert.AreEqual(ingredientId, tpIngredient.Id, "Transport 'Id' does not match Database 'Id'");
             Assert.AreEqual(TestName, tpIngredient.Name, "Transport 'Name' does not match Database 'Name'");
