@@ -24,7 +24,6 @@ test:
     - docker
   script:
     - docker build -f Ingredients.Test/Dockerfile --tag=cookbook-ingredient-test .
-    - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=json
 
 publish:
   stage: publish
