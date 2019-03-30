@@ -24,6 +24,7 @@ test:
     - docker
   script:
     - docker build -f Ingredients.Test/Dockerfile --tag=cookbook-ingredient-test .
+    - docker run cookbook-ingredient-test
 
 publish:
   stage: publish
