@@ -12,6 +12,13 @@
                 "reveal": "silent"
             },
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test",
+            "command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=json",
+            "type": "shell",
+            "group": "test",
+            "problemMatcher": "$msCompile"
         }
     ]
 }
