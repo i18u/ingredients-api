@@ -41,9 +41,9 @@ namespace Ingredients.Web.Controllers
         }
 
         [HttpGet]
-        public string Info() 
+        public Manifest Info() 
         {
-            return "{ \"version\": \"test\" }";
+            return Api.GetInformation();
         }
     }
 }
