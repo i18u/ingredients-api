@@ -7,7 +7,7 @@ namespace Ingredients.Web.Models.Transport
     /// Transport model for the <see cref="Database.Ingredient"/> model
     /// </summary>
     [DataContract]
-    public class Ingredient
+    public class Ingredient : IIngredient
     {
         /// <summary>
         /// Unique ingredient ID
@@ -34,20 +34,19 @@ namespace Ingredients.Web.Models.Transport
         public string[] Tags { get; set; }
 
         /// <summary>
-        /// Convert a <see cref="Database.Ingredient"/> instance to a <see cref="Transport.Ingredient"/> model
+        /// Convert a <see cref="IIngredient"/> instance to a <see cref="Transport.Ingredient"/> model
         /// </summary>
-        /// <param name="entity"><see cref="Database.Ingredient"/> to convert</param>
+        /// <param name="entity"><see cref="IIngredient"/> to convert</param>
         /// <returns>Converted <see cref="Transport.Ingredient"/> model</returns>
-        public static Ingredient FromDatabase(Models.Database.Ingredient entity)
+        public static Ingredient FromIngredient(IIngredient entity)
         {
-            var ingr = new Ingredient();
-
-            ingr.Id = entity.Id;
-            ingr.Name = entity.Name;
-            ingr.Description = entity.Description;
-            ingr.Tags = entity.Tags;
-
-            return ingr;
+            return new Ingredient
+            {
+                Id = entity.Id, 
+                Name = entity.Name, 
+                Description = entity.Description, 
+                Tags = entity.Tags
+            };
         }
     }
 }

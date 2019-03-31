@@ -1,5 +1,6 @@
 using System;
 using Cassandra;
+using Ingredients.Web.Cache;
 using Ingredients.Web.Models.Transport;
 
 namespace Ingredients.Web.Models.Database
@@ -7,7 +8,7 @@ namespace Ingredients.Web.Models.Database
     /// <summary>
     /// Database model for an 'ingredient' object
     /// </summary>
-    public class Ingredient
+    public class Ingredient : IIngredient
     {
         /// <summary>
         /// Unique ingredient ID
@@ -53,7 +54,7 @@ namespace Ingredients.Web.Models.Database
             return ingr;
         }
 
-        public static Ingredient FromTransport(Models.Transport.Ingredient entity)
+        public static Ingredient FromIngredient(IIngredient entity)
         {
             return new Ingredient
             {

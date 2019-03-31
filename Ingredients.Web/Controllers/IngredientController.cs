@@ -1,6 +1,7 @@
 using System;
 using System.Net;
-using Ingredients.Web.Models;
+using System.Threading.Tasks;
+using Ingredients.Web.Cache;
 using Ingredients.Web.Models.Transport;
 using Ingredients.Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -11,39 +12,41 @@ namespace Ingredients.Web.Controllers
     public class IngredientController : ControllerBase 
     {
         [HttpPost]
-        public ApiResponse<Models.Transport.Ingredient> Create([FromBody] Models.Transport.Ingredient ingredient)
+        public async Task<ApiResponse<Ingredient>> Create([FromBody] Ingredient ingredient)
         {
             Console.WriteLine($"Inserting new ingredient: {ingredient.Name}");
 
             var ingredientRepo = new IngredientRepository(CassandraDatabase.GetSession());
-            var createdItem = ingredientRepo.UpsertOne(Models.Database.Ingredient.FromTransport(ingredient));
+            var ingredientCache = new IngredientCache(ingredientRepo);
+            var createdItem = await ingredientCache.UpsertOneAsync(Models.Database.Ingredient.FromIngredient(ingredient));
 
             Console.WriteLine($"Successfully created item with {createdItem.Id}");
 
-            return ApiResponse<Models.Transport.Ingredient>.WithStatus(HttpStatusCode.OK)
-                .WithData(Models.Transport.Ingredient.FromDatabase(createdItem));
+            return ApiResponse<Ingredient>.WithStatus(HttpStatusCode.OK)
+                .WithData(Ingredient.FromIngredient(createdItem));
         }
 
         [HttpGet("{id}")]
-        public ApiResponse<Models.Transport.Ingredient> Get(Guid id)
+        public async Task<ApiResponse<Ingredient>> Get(Guid id)
         {
             Console.WriteLine($"Getting ingredient with id {id}");
 
             var ingredientRepo = new IngredientRepository(CassandraDatabase.GetSession());
-            var item = Models.Transport.Ingredient.FromDatabase(ingredientRepo.GetOne(id));
+            var ingredientCache = new IngredientCache(ingredientRepo);
+            var item = Ingredient.FromIngredient(await ingredientCache.GetOneAsync(id));
 
             if (item == null) 
             {
-                return ApiResponse<Models.Transport.Ingredient>.WithStatus(HttpStatusCode.BadRequest);
+                return ApiResponse<Ingredient>.WithStatus(HttpStatusCode.BadRequest);
             }
 
-            return ApiResponse<Models.Transport.Ingredient>.WithStatus(HttpStatusCode.OK).WithData(item);
+            return ApiResponse<Ingredient>.WithStatus(HttpStatusCode.OK).WithData(item);
         }
 
         [HttpGet]
-        public string Info() 
+        public async Task<string> Info() 
         {
-            return "{ \"version\": \"test\" }";
+            return await Task.FromResult("{ \"version\": \"test\" }");
         }
     }
 }

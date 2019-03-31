@@ -1,30 +1,29 @@
-using DatabaseIngredient = Ingredients.Web.Models.Database.Ingredient;
-using TransportIngredient = Ingredients.Web.Models.Transport.Ingredient;
-using NUnit.Framework;
 using System;
+using NUnit.Framework;
 
-namespace Tests
+namespace Ingredients.Test.Models
 {
     [TestFixture]
     public class IngredientConversion
     {
         private const string TestName = "TestName";
         private const string TestDescription = "TestDescription";
-        private static readonly string[] TestTags = new string[] { "TestTag1", "TestTag2", "TestTag3" };
+        private static readonly string[] TestTags = { "TestTag1", "TestTag2", "TestTag3" };
 
         [Test]
         public void AssertThat_TransportFromDatabase_KeepsData() {
 
             var ingredientId = Guid.NewGuid();
 
-            DatabaseIngredient dbIngredient = new DatabaseIngredient {
+            var dbIngredient = new Web.Models.Database.Ingredient 
+            {
                 Id = ingredientId,
                 Name = TestName,
                 Description = TestDescription,
                 Tags = TestTags
             };
 
-            TransportIngredient tpIngredient = TransportIngredient.FromDatabase(dbIngredient);
+            var tpIngredient = Web.Models.Transport.Ingredient.FromIngredient(dbIngredient);
 
             Assert.AreEqual(ingredientId, tpIngredient.Id, "Transport 'Id' does not match Database 'Id'");
             Assert.AreEqual(TestName, tpIngredient.Name, "Transport 'Name' does not match Database 'Name'");
