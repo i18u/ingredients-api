@@ -15,7 +15,7 @@
         },
         {
             "label": "test",
-            "command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=json",
+            "command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=json /p:Exclude=[Ingredients.Test]*",
             "type": "shell",
             "group": "test",
             "problemMatcher": "$msCompile"
