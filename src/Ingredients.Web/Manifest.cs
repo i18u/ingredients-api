@@ -63,17 +63,17 @@ namespace Ingredients.Web
         /// <returns>The loaded <see cref="Manifest"/> value.</returns>
         private static Manifest Load()
         {
+            Manifest apiManifest = null;
             var apiManifestStr = string.Join(
                 Environment.NewLine, // localized newline char
                 File.ReadAllLines("./api-manifest.json") // content of api-manifest.json, as string[]
             );
-            Manifest apiManifest = null;
 
             try
             {
                 apiManifest = JsonConvert.DeserializeObject<Manifest>(apiManifestStr);
             }
-            catch (JsonSerializationException ex)
+            catch (JsonSerializationException)
             {
                 apiManifest = Manifest.Default;
             }
