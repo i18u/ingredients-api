@@ -8,6 +8,13 @@ namespace Ingredients.Web
     [DataContract]
     public class Manifest
     {
+        public static Manifest Default = new Manifest 
+        {
+            Name = "Ingredients",
+            Description = "Ingredients",
+            Version = new Version(0, 0)
+        };
+
         protected static Lazy<Manifest> _instance = new Lazy<Manifest>(Load);
 
         /// <summary>
@@ -60,17 +67,21 @@ namespace Ingredients.Web
                 Environment.NewLine, // localized newline char
                 File.ReadAllLines("./api-manifest.json") // content of api-manifest.json, as string[]
             );
-            var apiManifest = JsonConvert.DeserializeObject<Manifest>(apiManifestStr);
+            Manifest apiManifest = null;
+
+            try
+            {
+                apiManifest = JsonConvert.DeserializeObject<Manifest>(apiManifestStr);
+            }
+            catch (JsonSerializationException ex)
+            {
+                apiManifest = Manifest.Default;
+            }
 
             if (apiManifest == null)
             {
                 // Handle this -- it's not the end of the world if this is inaccurate.
-                return new Manifest 
-                {
-                    Name = "Ingredients",
-                    Description = "Ingredients",
-                    Version = new Version(0, 0)
-                };
+                return Manifest.Default;
             }
 
             return apiManifest;
