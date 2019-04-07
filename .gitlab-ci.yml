@@ -11,7 +11,7 @@ build:
   tags:
     - docker
   script:
-    - docker build . --tag=cookbook-ingredient-api
+    - docker build . --build-arg CI_COMMIT_TAG=$CI_COMMIT_TAG --tag=cookbook-ingredient-api
     - mkdir out
     - docker save cookbook-ingredient-api > out/cookbook-ingredient-api.tar
   artifacts:
@@ -24,7 +24,7 @@ test:
   tags:
     - docker
   script:
-    - docker build . -f ./Dockerfile.test --tag=cookbook-test-$CI_COMMIT_SHA
+    - docker build . -f ./Dockerfile.test --build-arg CI_COMMIT_TAG=$CI_COMMIT_TAG --tag=cookbook-test-$CI_COMMIT_SHA
     - docker run cookbook-test-$CI_COMMIT_SHA
 
 publish:

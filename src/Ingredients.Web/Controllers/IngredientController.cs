@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using Ingredients.Web;
 using Ingredients.Web.Models;
 using Ingredients.Web.Models.Transport;
 using Ingredients.Web.Repositories;
@@ -41,9 +42,9 @@ namespace Ingredients.Web.Controllers
         }
 
         [HttpGet]
-        public string Info() 
+        public Manifest Info() 
         {
-            return "{ \"version\": \"test\" }";
+            return Api.GetInformation();
         }
     }
 }
