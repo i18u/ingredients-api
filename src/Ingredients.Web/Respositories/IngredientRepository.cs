@@ -15,15 +15,51 @@ namespace Ingredients.Web.Repositories
             _session = session;
         }
 
+        public IEnumerable<Ingredient> Get(int page = 1, int limit = 20)
+        {
+            // Keep limit within the (0,100] range
+            if (limit > 100)
+            {
+                limit = 100;
+            }
+            else if (limit <= 0)
+            {
+                return new List<Ingredient>();
+            }
+
+            var ps = _session.Prepare("SELECT * FROM ingredient");
+            var statement = ps.Bind().SetPageSize(limit);
+
+            var results = _session.Execute(statement);
+            var memResults = new List<Ingredient>();
+
+            if(page > 1)
+            {
+                var resultsToSkip = page * limit;
+                results.Skip(resultsToSkip);
+            }
+
+            foreach (var row in results)
+            {
+                // Results is an enumerator of ALL the rows in the table, however
+                // it retrieves them from Cassandra in blocks of the specified size
+                var item = Ingredient.FromRow(row);
+
+                memResults.Add(item);
+            }
+
+            return memResults;
+        }
+
         public Ingredient GetOne(Guid id)
         {
             var ps = _session.Prepare("SELECT name, description, tags FROM ingredient WHERE id = ?");
             var statement = ps.Bind(id);
-            
+
             var results = _session.Execute(statement);
             var memResults = new List<Ingredient>();
 
-            foreach (var row in results) 
+            foreach (var row in results)
             {
                 var item = Ingredient.FromRow(id, row);
 
@@ -46,7 +82,7 @@ namespace Ingredients.Web.Repositories
             var description = model.Description;
             var tags = model.Tags;
 
-            if (model.Id != Guid.Empty) 
+            if (model.Id != Guid.Empty)
             {
                 entityId = model.Id;
             }
