@@ -5,7 +5,12 @@
     "tasks": [
         {
             "label": "build",
-            "command": "cd '${workspaceFolder}' && dotnet build",
+            "linux": {
+                "command": "cd '${workspaceFolder}/src' && dotnet build"
+            },
+            "windows": {
+                "command": "cd '${workspaceFolder}/src'; dotnet build",
+            },
             "type": "shell",
             "group": "build",
             "presentation": {
