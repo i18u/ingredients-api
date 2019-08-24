@@ -14,7 +14,7 @@ namespace Ingredients.Web.Helpers
 		private static readonly Lazy<IMongoClient> _connection = new Lazy<IMongoClient>(CreateClient);
 
 		/// <summary>
-		/// Lazy singleton instance
+		/// Lazy singleton instance of <see cref="IMongoClient"/>
 		/// </summary>
 		public static IMongoClient Connection => _connection.Value;
 
