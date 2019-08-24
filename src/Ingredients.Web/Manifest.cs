@@ -8,7 +8,7 @@ namespace Ingredients.Web
     [DataContract]
     public class Manifest
     {
-        public static Manifest Default = new Manifest 
+        public static Manifest Default = new Manifest
         {
             Name = "Ingredients",
             Description = "Ingredients",
@@ -29,7 +29,6 @@ namespace Ingredients.Web
             }
         }
 
-
         [DataMember(Name = "name")]
         public string Name { get; set; }
 
@@ -40,7 +39,7 @@ namespace Ingredients.Web
         public Version Version { get; set; }
 
         [DataMember(Name = "version")]
-        public string VersionString 
+        public string VersionString
         {
             get
             {
