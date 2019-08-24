@@ -42,13 +42,18 @@ namespace Ingredients.Web.Repositories
 				return new List<TModel>();
 			}
 
-			var totalSkipped = page * limit;
-
-			return Collection
+			var cursor = Collection
 				.Find(FilterDefinition<TModel>.Empty)
-				.Skip(totalSkipped)
-				.Limit(limit)
-				.ToEnumerable();
+				.Limit(limit);
+
+			if (page > 1)
+			{
+				var totalSkipped = (page - 1) * limit;
+
+				cursor = cursor.Skip(totalSkipped);
+			}
+
+			return cursor.ToEnumerable();
 		}
 
 		/// <inheritdoc />
