@@ -1,5 +1,5 @@
 using System;
-using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Ingredients.Web.Models.Database
 {
@@ -11,6 +11,7 @@ namespace Ingredients.Web.Models.Database
 		/// <summary>
 		/// Unique ingredient ID
 		/// </summary>
+		[BsonId]
 		public Guid Id { get; set; }
 
 		/// <summary>

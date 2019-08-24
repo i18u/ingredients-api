@@ -4,3 +4,5 @@ bin/
 coverage.json
 
 *.DotSettings.user
+
+./data/
