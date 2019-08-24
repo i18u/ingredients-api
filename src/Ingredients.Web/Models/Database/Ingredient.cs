@@ -1,4 +1,5 @@
 using System;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Ingredients.Web.Models.Database
@@ -12,7 +13,8 @@ namespace Ingredients.Web.Models.Database
 		/// Unique ingredient ID
 		/// </summary>
 		[BsonId]
-		public Guid Id { get; set; }
+		[BsonElement("_id")]
+		public ObjectId Id { get; set; }
 
 		/// <summary>
 		/// Human-readable ingredient name
@@ -33,7 +35,7 @@ namespace Ingredients.Web.Models.Database
 		{
 			return new Ingredient
 			{
-				Id = entity.Id,
+				Id = entity.Id ?? ObjectId.GenerateNewId(DateTime.UtcNow),
 				Name = entity.Name,
 				Description = entity.Description,
 				Tags = entity.Tags
