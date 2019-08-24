@@ -48,7 +48,7 @@ namespace Ingredients.Web.Repositories
 
 			if (page > 1)
 			{
-				var totalSkipped = (page - 1) * limit;
+				var totalSkipped = page * limit;
 
 				cursor = cursor.Skip(totalSkipped);
 			}
