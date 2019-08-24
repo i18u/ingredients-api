@@ -35,7 +35,7 @@ namespace Ingredients.Web.Models.Database
 		{
 			return new Ingredient
 			{
-				Id = entity.Id,
+				Id = entity.Id ?? ObjectId.GenerateNewId(DateTime.UtcNow),
 				Name = entity.Name,
 				Description = entity.Description,
 				Tags = entity.Tags

@@ -15,15 +15,21 @@ namespace Ingredients.Web.Controllers
 		[HttpPost]
 		public ApiResponse<ObjectId> Create([FromBody] Ingredient ingredient)
 		{
+			if (ingredient == null)
+			{
+				Console.WriteLine("Error with ingredient object");
+				return ApiResponse<ObjectId>.WithStatus(400).WithMessage("Error creating new ingredient.");
+			}
+
 			Console.WriteLine($"Inserting new ingredient: {ingredient.Name}");
 
 			var ingredientRepo = new IngredientRepository(MongoManager.Connection);
-			var createdGuid = ingredientRepo.Upsert(Models.Database.Ingredient.FromTransport(ingredient));
+			var createdId = ingredientRepo.Upsert(Models.Database.Ingredient.FromTransport(ingredient));
 
-			Console.WriteLine($"Successfully created item with {createdGuid}");
+			Console.WriteLine($"Successfully created item with {createdId}");
 
 			return ApiResponse<ObjectId>.WithStatus(HttpStatusCode.OK)
-				.WithData(createdGuid);
+				.WithData(createdId);
 		}
 
 		[HttpGet]

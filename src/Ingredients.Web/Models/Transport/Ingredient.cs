@@ -1,4 +1,3 @@
-using System;
 using System.Runtime.Serialization;
 using MongoDB.Bson;
 
@@ -14,7 +13,7 @@ namespace Ingredients.Web.Models.Transport
 		/// Unique ingredient ID
 		/// </summary>
 		[DataMember(Name = "id")]
-		public ObjectId Id { get; set; }
+		public ObjectId? Id { get; set; }
 
 		/// <summary>
 		/// Human-readable ingredient name
