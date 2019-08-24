@@ -5,6 +5,10 @@ using MongoDB.Driver;
 
 namespace Ingredients.Web.Repositories
 {
+	/// <summary>
+	/// Abstract repository pattern for MongoDB for retrieval of <typeparamref name="TModel"/> objects
+	/// </summary>
+	/// <typeparam name="TModel">Type of object in this repository</typeparam>
 	public abstract class MongoRepository<TModel> : IRepository<TModel> where TModel : IMongoModel
 	{
 		/// <summary>
