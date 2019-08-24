@@ -1,15 +1,15 @@
-using MongoDB.Bson;
+using System;
 
 namespace Ingredients.Web.Models.Database
 {
 	/// <summary>
-	/// Interface defining an object that can be uniquely represented by an <see cref="ObjectId"/>
+	/// Interface defining an object that can be uniquely represented by an <see cref="Guid"/>
 	/// </summary>
 	public interface IMongoModel
 	{
 		/// <summary>
-		/// Unique <see cref="ObjectId"/> identifier for this <see cref="IMongoModel"/>
+		/// Unique <see cref="Guid"/> identifier for this <see cref="IMongoModel"/>
 		/// </summary>
-		ObjectId Id { get; }
+		Guid Id { get; }
 	}
 }

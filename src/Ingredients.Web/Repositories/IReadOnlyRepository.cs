@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using Ingredients.Web.Models.Database;
-using MongoDB.Bson;
 
 namespace Ingredients.Web.Repositories
 {
@@ -12,10 +12,10 @@ namespace Ingredients.Web.Repositories
 	{
 		/// <summary>
 		/// Retrieve a single <typeparamref name="TModel"/> instance from
-		/// the database using a unique <see cref="ObjectId"/>.
+		/// the database using a unique <see cref="Guid"/>.
 		/// </summary>
 		/// <returns>Single <typeparamref name="TModel"/> instance.</returns>
-		TModel Get(ObjectId id);
+		TModel Get(Guid id);
 
 		/// <summary>
 		/// Retrieve a set of <typeparamref name="TModel"/> instances from the database
