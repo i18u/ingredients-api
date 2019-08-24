@@ -2,3 +2,5 @@
 obj/
 bin/
 coverage.json
+
+*.DotSettings.user
