@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Ingredients.Web.Models.Database;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Ingredients.Web.Repositories
@@ -27,7 +28,7 @@ namespace Ingredients.Web.Repositories
 		}
 
 		/// <inheritdoc />
-		public TModel Get(Guid id)
+		public TModel Get(ObjectId id)
 		{
 			var filter = Builders<TModel>.Filter.Eq(document => document.Id, id);
 
@@ -57,7 +58,7 @@ namespace Ingredients.Web.Repositories
 		}
 
 		/// <inheritdoc />
-		public Guid Upsert(TModel model)
+		public ObjectId Upsert(TModel model)
 		{
 			if (model == null)
 			{
@@ -71,11 +72,11 @@ namespace Ingredients.Web.Repositories
 				IsUpsert = true
 			});
 
-			return upsertResult.UpsertedId.AsGuid;
+			return upsertResult.UpsertedId?.AsObjectId ?? model.Id;
 		}
 
 		/// <inheritdoc />
-		public IEnumerable<Guid> UpsertMany(IEnumerable<TModel> models)
+		public IEnumerable<ObjectId> UpsertMany(IEnumerable<TModel> models)
 		{
 			throw new NotImplementedException();
 		}

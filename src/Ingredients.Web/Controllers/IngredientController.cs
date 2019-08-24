@@ -5,6 +5,7 @@ using Ingredients.Web.Helpers;
 using Ingredients.Web.Models.Transport;
 using Ingredients.Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
 namespace Ingredients.Web.Controllers
 {
@@ -12,7 +13,7 @@ namespace Ingredients.Web.Controllers
 	public class IngredientController : ControllerBase
 	{
 		[HttpPost]
-		public ApiResponse<Guid> Create([FromBody] Ingredient ingredient)
+		public ApiResponse<ObjectId> Create([FromBody] Ingredient ingredient)
 		{
 			Console.WriteLine($"Inserting new ingredient: {ingredient.Name}");
 
@@ -21,7 +22,7 @@ namespace Ingredients.Web.Controllers
 
 			Console.WriteLine($"Successfully created item with {createdGuid}");
 
-			return ApiResponse<Guid>.WithStatus(HttpStatusCode.OK)
+			return ApiResponse<ObjectId>.WithStatus(HttpStatusCode.OK)
 				.WithData(createdGuid);
 		}
 
@@ -48,7 +49,7 @@ namespace Ingredients.Web.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public ApiResponse<Ingredient> Get(Guid id)
+		public ApiResponse<Ingredient> Get(ObjectId id)
 		{
 			Console.WriteLine($"Getting ingredient with id {id}");
 

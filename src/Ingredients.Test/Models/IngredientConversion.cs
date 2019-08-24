@@ -2,6 +2,7 @@ using DatabaseIngredient = Ingredients.Web.Models.Database.Ingredient;
 using TransportIngredient = Ingredients.Web.Models.Transport.Ingredient;
 using NUnit.Framework;
 using System;
+using MongoDB.Bson;
 
 namespace Tests
 {
@@ -15,7 +16,7 @@ namespace Tests
         [Test]
         public void AssertThat_TransportFromDatabase_KeepsData() {
 
-            var ingredientId = Guid.NewGuid();
+            var ingredientId = ObjectId.GenerateNewId(0);
 
             DatabaseIngredient dbIngredient = new DatabaseIngredient {
                 Id = ingredientId,

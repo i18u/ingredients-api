@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Ingredients.Web.Models.Database;
+using MongoDB.Bson;
 
 namespace Ingredients.Web.Repositories
 {
@@ -13,18 +14,18 @@ namespace Ingredients.Web.Repositories
 	{
 		/// <summary>
 		/// Upsert a <typeparamref name="TModel"/> object into this repository, either inserting a new document or
-		/// updating an existing document if one already exists, and return the object's <see cref="Guid"/>.
+		/// updating an existing document if one already exists, and return the object's <see cref="ObjectId"/>.
 		/// </summary>
 		/// <param name="model"><typeparamref name="TModel"/> instance to upsert.</param>
 		/// <returns>Provided <typeparamref name="TModel"/> object.</returns>
-		Guid Upsert(TModel model);
+		ObjectId Upsert(TModel model);
 
 		/// <summary>
 		/// Upsert many <typeparamref name="TModel"/> objects into this repository, either inserting new documents or
-		/// updating existing documents if they don't already exist, and return a set of each <see cref="Guid"/>.
+		/// updating existing documents if they don't already exist, and return a set of each <see cref="ObjectId"/>.
 		/// </summary>
 		/// <param name="models">Set of <typeparamref name="TModel"/> instances to upsert.</param>
-		/// <returns>Set of upserted <see cref="Guid"/> values for specified documents.</returns>
-		IEnumerable<Guid> UpsertMany(IEnumerable<TModel> models);
+		/// <returns>Set of upserted <see cref="ObjectId"/> values for specified documents.</returns>
+		IEnumerable<ObjectId> UpsertMany(IEnumerable<TModel> models);
 	}
 }
