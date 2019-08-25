@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Ingredients.Web.Models.Database;
 using MongoDB.Bson;

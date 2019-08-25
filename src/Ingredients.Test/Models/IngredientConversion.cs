@@ -1,7 +1,6 @@
 using DatabaseIngredient = Ingredients.Web.Models.Database.Ingredient;
 using TransportIngredient = Ingredients.Web.Models.Transport.Ingredient;
 using NUnit.Framework;
-using System;
 using MongoDB.Bson;
 
 namespace Tests
