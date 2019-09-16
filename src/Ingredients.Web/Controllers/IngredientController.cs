@@ -55,12 +55,17 @@ namespace Ingredients.Web.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public ApiResponse<Ingredient> Get(ObjectId id)
+		public ApiResponse<Ingredient> Get(string id)
 		{
 			Console.WriteLine($"Getting ingredient with id {id}");
 
+			if (!ObjectId.TryParse(id, out var objectId))
+			{
+                return ApiResponse<Ingredient>.WithStatus(HttpStatusCode.BadRequest).WithMessage("Incorrectly formatted ingredient ID provided.");
+            }
+
 			var ingredientRepo = new IngredientRepository(MongoManager.Connection);
-			var item = Ingredient.FromDatabase(ingredientRepo.Get(id));
+			var item = Ingredient.FromDatabase(ingredientRepo.Get(objectId));
 
 			if (item == null)
 			{

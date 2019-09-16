@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson.Serialization.Conventions;
 using Newtonsoft.Json;
 
 namespace Ingredients.Web
@@ -44,7 +45,8 @@ namespace Ingredients.Web
             {
                 app.UseHsts();
             }
-            
+
+            RegisterConventions();
 
             app.UseExceptionHandler(new ExceptionHandlerOptions
             {
@@ -54,6 +56,22 @@ namespace Ingredients.Web
             app.UseMvc();
         }
 
+        private static bool IgnoreIfDefaultConventionFilter(Type type) => true;
+
+        private void RegisterConventions()
+		{
+            var conventionPack = new ConventionPack
+            {
+                new IgnoreIfDefaultConvention(true)
+            };
+
+            ConventionRegistry.Register(
+				"IgnoreIfDefault",
+				conventionPack,
+				IgnoreIfDefaultConventionFilter
+			);
+        }
+
         private async Task WriteExceptionToResponse(HttpContext context)
         {
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
@@ -61,7 +79,7 @@ namespace Ingredients.Web
             var ex = context.Features.Get<IExceptionHandlerFeature>()?.Error;
             if (ex == null) return;
 
-            var error = new 
+            var error = new
             {
                 message = ex.Message
             };
