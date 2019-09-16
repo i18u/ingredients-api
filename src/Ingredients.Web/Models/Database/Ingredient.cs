@@ -19,26 +19,35 @@ namespace Ingredients.Web.Models.Database
 		/// <summary>
 		/// Human-readable ingredient name
 		/// </summary>
+		[BsonElement("name")]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// Short ingredient description
 		/// </summary>
+		[BsonElement("description")]
 		public string Description { get; set; }
 
 		/// <summary>
 		/// Any tags / categorisation for this ingredient
 		/// </summary>
+		[BsonElement("tags")]
 		public string[] Tags { get; set; }
 
-		public static Ingredient FromTransport(Models.Transport.Ingredient entity)
+		/// <summary>
+		/// The location of any image resources.
+		/// </summary>
+		public string ImageLocation { get; set; }
+
+        public static Ingredient FromTransport(Models.Transport.Ingredient entity)
 		{
 			return new Ingredient
 			{
 				Id = entity.Id ?? ObjectId.GenerateNewId(DateTime.UtcNow),
 				Name = entity.Name,
 				Description = entity.Description,
-				Tags = entity.Tags
+				Tags = entity.Tags,
+				ImageLocation = entity.ImageLocation
 			};
 		}
 	}

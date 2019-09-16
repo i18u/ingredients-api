@@ -34,6 +34,12 @@ namespace Ingredients.Web.Models.Transport
 		public string[] Tags { get; set; }
 
 		/// <summary>
+		/// The image location for this ingredient.
+		/// </summary>
+		[DataMember(Name = "img")]
+		public string ImageLocation { get; set; }
+
+		/// <summary>
 		/// Convert a <see cref="Database.Ingredient"/> instance to a <see cref="Transport.Ingredient"/> model
 		/// </summary>
 		/// <param name="entity"><see cref="Database.Ingredient"/> to convert</param>
@@ -45,7 +51,8 @@ namespace Ingredients.Web.Models.Transport
 				Id = entity.Id,
 				Name = entity.Name,
 				Description = entity.Description,
-				Tags = entity.Tags
+				Tags = entity.Tags,
+				ImageLocation = entity.ImageLocation
 			};
 		}
 	}
