@@ -5,31 +5,31 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace Ingredients.Web.Models.Database
 {
 	/// <summary>
-	/// Database model for an 'ingredient' object
+	/// Database model for an 'ingredient' object.
 	/// </summary>
 	public class Ingredient : IMongoModel
 	{
 		/// <summary>
-		/// Unique ingredient ID
+		/// Unique ingredient ID.
 		/// </summary>
 		[BsonId]
 		[BsonElement("_id")]
 		public ObjectId Id { get; set; }
 
 		/// <summary>
-		/// Human-readable ingredient name
+		/// Human-readable ingredient name.
 		/// </summary>
 		[BsonElement("name")]
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Short ingredient description
+		/// Short ingredient description.
 		/// </summary>
 		[BsonElement("description")]
 		public string Description { get; set; }
 
 		/// <summary>
-		/// Any tags / categorisation for this ingredient
+		/// Any tags / categorisation for this ingredient.
 		/// </summary>
 		[BsonElement("tags")]
 		public string[] Tags { get; set; }

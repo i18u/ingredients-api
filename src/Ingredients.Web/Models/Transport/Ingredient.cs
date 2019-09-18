@@ -4,19 +4,19 @@ using MongoDB.Bson;
 namespace Ingredients.Web.Models.Transport
 {
 	/// <summary>
-	/// Transport model for the <see cref="Database.Ingredient"/> model
+	/// Transport model for the <see cref="Database.Ingredient"/> model.
 	/// </summary>
 	[DataContract]
 	public class Ingredient
 	{
 		/// <summary>
-		/// Unique ingredient ID
+		/// Unique ingredient ID.
 		/// </summary>
 		[DataMember(Name = "id")]
 		public ObjectId? Id { get; set; }
 
 		/// <summary>
-		/// Human-readable ingredient name
+		/// Human-readable ingredient name.
 		/// </summary>
 		[DataMember(Name = "name")]
 		public string Name { get; set; }

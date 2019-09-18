@@ -7,13 +7,13 @@ using MongoDB.Driver;
 namespace Ingredients.Web.Repositories
 {
 	/// <summary>
-	/// Abstract repository pattern for MongoDB for retrieval of <typeparamref name="TModel"/> objects
+	/// Abstract repository pattern for MongoDB for retrieval of <typeparamref name="TModel"/> objects.
 	/// </summary>
-	/// <typeparam name="TModel">Type of object in this repository</typeparam>
+	/// <typeparam name="TModel">Type of object in this repository.</typeparam>
 	public abstract class MongoRepository<TModel> : IRepository<TModel> where TModel : IMongoModel
 	{
 		/// <summary>
-		/// The backing <see cref="IMongoCollection{TModel}"/> for this <see cref="MongoRepository{TModel}"/>
+		/// The backing <see cref="IMongoCollection{TModel}"/> for this <see cref="MongoRepository{TModel}"/>.
 		/// </summary>
 		protected IMongoCollection<TModel> Collection { get; }
 
