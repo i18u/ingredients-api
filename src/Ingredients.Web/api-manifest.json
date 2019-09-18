@@ -1,5 +1,5 @@
 {
-    "name": "Cookbook Ingredients API",
-    "description": "This API's purpose is to return information about particular ingredients to the user.",
-    "version": "0.0.0"
+  "name": "Cookbook Ingredients API",
+  "description": "This API's purpose is to return information about particular ingredients to the user.",
+  "version": "0.0.0"
 }

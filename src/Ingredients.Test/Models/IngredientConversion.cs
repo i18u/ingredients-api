@@ -1,17 +1,16 @@
+using MongoDB.Bson;
+using NUnit.Framework;
 using DatabaseIngredient = Ingredients.Web.Models.Database.Ingredient;
 using TransportIngredient = Ingredients.Web.Models.Transport.Ingredient;
-using NUnit.Framework;
-using System;
-using MongoDB.Bson;
 
-namespace Tests
+namespace Ingredients.Test.Models
 {
 	[TestFixture]
 	public class IngredientConversion
 	{
 		private const string TestName = "TestName";
 		private const string TestDescription = "TestDescription";
-		private static readonly string[] TestTags = new string[] { "TestTag1", "TestTag2", "TestTag3" };
+		private static readonly string[] TestTags = { "TestTag1", "TestTag2", "TestTag3" };
 
 		[Test]
 		public void AssertThat_TransportFromDatabase_KeepsData() {
