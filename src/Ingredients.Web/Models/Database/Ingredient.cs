@@ -39,6 +39,11 @@ namespace Ingredients.Web.Models.Database
 		/// </summary>
 		public string ImageLocation { get; set; }
 
+		/// <summary>
+		/// Convert a <see cref="Models.Transport.Ingredient"/> object into a <see cref="Models.Database.Ingredient"/> object.
+		/// </summary>
+		/// <param name="entity"><see cref="Models.Transport.Ingredient"/> object to convert.</param>
+		/// <returns>Converted <see cref="Models.Database.Ingredient"/> object.</returns>
         public static Ingredient FromTransport(Models.Transport.Ingredient entity)
 		{
 			return new Ingredient

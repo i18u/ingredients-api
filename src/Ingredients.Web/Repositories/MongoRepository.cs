@@ -74,11 +74,5 @@ namespace Ingredients.Web.Repositories
 
 			return upsertResult.UpsertedId?.AsObjectId ?? model.Id;
 		}
-
-		/// <inheritdoc />
-		public IEnumerable<ObjectId> UpsertMany(IEnumerable<TModel> models)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

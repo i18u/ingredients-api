@@ -5,7 +5,7 @@ using MongoDB.Bson;
 namespace Ingredients.Web.Repositories
 {
 	/// <summary>
-	/// Interface to define a repository storing <typeparamref name="TModel"/> objects.
+	/// Interface to define a repository to store <typeparamref name="TModel"/> objects.
 	/// </summary>
 	/// <typeparam name="TModel">Type of object stored in this repository.</typeparam>
 	public interface IReadOnlyRepository<TModel> where TModel : IMongoModel
