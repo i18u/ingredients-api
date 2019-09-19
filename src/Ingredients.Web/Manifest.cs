@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Ingredients.Web
 {
 	/// <summary>
-	/// Manifest for API information
+	/// Manifest for API information.
 	/// </summary>
 	[DataContract]
 	public class Manifest
@@ -32,15 +32,27 @@ namespace Ingredients.Web
 		/// <value><see cref="Manifest"/> instance.</value>
 		public static Manifest Instance => _instance.Value;
 
+		/// <summary>
+		/// Instance name.
+		/// </summary>
 		[DataMember(Name = "name")]
 		public string Name { get; set; }
 
+		/// <summary>
+		/// Instance description.
+		/// </summary>
 		[DataMember(Name = "description")]
 		public string Description { get; set; }
 
+		/// <summary>
+		/// Instance version as <see cref="Version"/> object.
+		/// </summary>
 		[IgnoreDataMember]
 		public Version Version { get; set; }
 
+		/// <summary>
+		/// Instance version as <see langword="string"/> object.
+		/// </summary>
 		[DataMember(Name = "version")]
 		public string VersionString
 		{
