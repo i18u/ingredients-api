@@ -1,6 +1,6 @@
 root = true
 
-[*.cs]
+[*.cs,*.md]
 tab_width = 4
 indent_size = tab
 indent_style = tab
