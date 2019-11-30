@@ -10,6 +10,6 @@ jobs:
     - name: setup-dotnetcore
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 2.2.108
+        dotnet-version: 2.1.802
     - name: dotnet-build
       run: dotnet build --configuration Release ./src/
