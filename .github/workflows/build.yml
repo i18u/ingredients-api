@@ -24,4 +24,4 @@ jobs:
         with:
           name: ${{ github.ref }}-on-push
       - name: dotnet-test
-        run: dotnet test -v=normal --no-build -c Release ./${GITHUB_REF##*/}-on-push/
+        run: dotnet test -v=normal --no-build -c Release ./${{ github.ref }}-on-push/
