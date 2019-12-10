@@ -13,7 +13,7 @@ jobs:
       run: dotnet build -c Release -o ./out/ ./src/
     - uses: actions/upload-artifact@v1
       with:
-        name: ${{ github.ref }}-on-push
+        name: ${{ github.sha }}-on-push
         path: ./out/
   test:
       runs-on: ubuntu-latest
@@ -22,6 +22,6 @@ jobs:
       steps:
       - uses: actions/download-artifact@v1
         with:
-          name: ${{ github.ref }}-on-push
+          name: ${{ github.sha }}-on-push
       - name: dotnet-test
-        run: dotnet test -v=normal --no-build -c Release ./${{ github.ref }}-on-push/
+        run: dotnet test -v=normal --no-build -c Release ./${{ github.sha }}-on-push/
