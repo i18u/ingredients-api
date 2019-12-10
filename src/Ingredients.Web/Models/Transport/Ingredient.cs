@@ -22,13 +22,13 @@ namespace Ingredients.Web.Models.Transport
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Short ingredient description
+		/// Short ingredient description.
 		/// </summary>
 		[DataMember(Name = "description")]
 		public string Description { get; set; }
 
 		/// <summary>
-		/// Any tags / categorisation for this ingredient
+		/// Any tags / categorisation for this ingredient.
 		/// </summary>
 		[DataMember(Name = "tags")]
 		public string[] Tags { get; set; }
@@ -40,7 +40,7 @@ namespace Ingredients.Web.Models.Transport
 		public string ImageLocation { get; set; }
 
 		/// <summary>
-		/// Convert a <see cref="Database.Ingredient"/> instance to a <see cref="Transport.Ingredient"/> model
+		/// Convert a <see cref="Database.Ingredient"/> instance to a <see cref="Transport.Ingredient"/> model.
 		/// </summary>
 		/// <param name="entity"><see cref="Database.Ingredient"/> to convert</param>
 		/// <returns>Converted <see cref="Transport.Ingredient"/> model</returns>
