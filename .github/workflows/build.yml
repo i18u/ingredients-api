@@ -1,15 +1,28 @@
-name: build
+name: on-push
 
 on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/core/sdk:3.1.100-alpine
     steps:
     - uses: actions/checkout@v1
-    - name: setup-dotnetcore
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.100
     - name: dotnet-build
-      run: dotnet build --configuration Release ./src/
+      run: dotnet build -c Release -o ./out/ ./src/
+    - uses: actions/upload-artifact@v1
+      with:
+        name: ${GITHUB_REF##*/}-on-push
+        path: ./out/
+
+  test:
+      runs-on: ubuntu-latest
+      container:
+        image : mcr.microsoft.com/dotnet/core/sdk:3.1.100-alpine
+      steps:
+      - uses: actions/download-artifact@v1
+        with:
+          name: ${GITHUB_REF##*/}-on-push
+      - name: dotnet-test
+        run: dotnet test -v=normal --no-build -c Release ./${GITHUB_REF##*/}-on-push/
