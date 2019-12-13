@@ -1,15 +1,15 @@
-name: build
+name: on-push
 
 on: [push]
 
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/core/sdk:3.1.100-alpine
     steps:
     - uses: actions/checkout@v1
-    - name: setup-dotnetcore
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 2.1.802
     - name: dotnet-build
-      run: dotnet build --configuration Release ./src/
+      run: dotnet build -c Release ./src/
+    - name: dotnet-test
+      run: dotnet test -v=normal --no-build ./src/

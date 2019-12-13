@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Net;
+using Ingredients.Core.Models;
 using Ingredients.Web.Helpers;
 using Ingredients.Web.Models.Transport;
 using Ingredients.Web.Repositories;
@@ -32,7 +33,7 @@ namespace Ingredients.Web.Controllers
 			Console.WriteLine($"Inserting new ingredient: {ingredient.Name}");
 
 			var ingredientRepo = new IngredientRepository(MongoManager.Connection);
-			var createdId = ingredientRepo.Upsert(Models.Database.Ingredient.FromTransport(ingredient));
+			var createdId = ingredientRepo.Upsert(ingredient);
 
 			Console.WriteLine($"Successfully created item with {createdId}");
 
