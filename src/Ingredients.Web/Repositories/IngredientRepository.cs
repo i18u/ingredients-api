@@ -1,3 +1,4 @@
+using Ingredients.Core.Models;
 using Ingredients.Web.Models.Database;
 using MongoDB.Driver;
 

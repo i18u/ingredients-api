@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Ingredients.Core.Repositories.Base;
 using MongoDB.Bson;
 
 namespace Ingredients.Core.Models
@@ -6,8 +7,11 @@ namespace Ingredients.Core.Models
 	/// <summary>
 	/// Ingredients API core model.
 	/// </summary>
-	public class Ingredient
+	public class Ingredient : IUnique<ObjectId>
 	{
+		public const string DatabaseKey = "cookbook";
+		public const string CollectionKey = "ingredients";
+
 		/// <summary>
 		/// Unique ingredient ID.
 		/// </summary>

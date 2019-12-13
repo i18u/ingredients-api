@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ingredients.Core\Ingredients.Core.csproj" />
     <ProjectReference Include="..\Ingredients.Web\Ingredients.Web.csproj" />
   </ItemGroup>
 
